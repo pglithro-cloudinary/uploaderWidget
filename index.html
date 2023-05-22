@@ -1,54 +1,74 @@
 <html>
-  <head>
+
+<head>
     <title>Cloudinary Uploader Widget Demo</title>
-    <style> 
-      Body {font-family:Arial}
+    <style>
+        Body {
+            font-family: Arial
+        }
     </style>
-    <script>
-        
-var myWidget = cloudinary.createUploadWidget({
-  cloudName: 'patrickg', 
-  uploadPreset: 'unsigned', sources: ['local','url']}, (error, result) => { 
-    if (!error && result && result.event === "success") { 
-      console.log('Done! Here is the image info: ', result.info); 
-    }
-  }
-)
+    <script src="https://upload-widget.cloudinary.com/global/all.js"
+        type="text/javascript"></script>
+</head>
 
-document.getElementById("upload_widget").addEventListener("click", function(){
-    myWidget.open();
-    var urlParams;
-(window.onpopstate = function () {
-    var match,
-        pl     = /\+/g,  // Regex for replacing addition symbol with a space
-        search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-        query  = window.location.search.substring(1);
-  
-    urlParams = {};
-    while (match = search.exec(query))
-       urlParams[decode(match[1])] = decode(match[2]);
-})();
-  var logoId = urlParams["logoId"];
-  if (logoId) {
-  document.getElementById("logo").src = "https://res.cloudinary.com/patrickg/image/upload/f_auto/q_auto/w_250,h_200,c_fit/"+logoId";
-  }
-  }, false);
-
-    </script>
-  </head>
 <body>
 
-<img id="logo" src="">
-  
-<h1>Image Uploader</h1>
-<h2>Instructions</h2>
-<p>Click Upload files and choose the file you want to upload. Make sure you use the highest quality file that you can.</p>
+    <img id="logo"
+        src="https://res.cloudinary.com/patrickg/image/upload/f_auto/q_auto/w_250,h_200,c_fit/cloudinary_logo">
 
-<h2>Style Guidelines</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+    <h1>Image Uploader</h1>
+    <h2>Instructions</h2>
+    <p>Click Upload files and choose the file you want to upload. Make sure you
+        use the highest quality file that you can.</p>
 
-<button id="upload_widget" class="cloudinary-button">Upload files</button>
+    <h2>Style Guidelines</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+    </p>
+
+    <button id="upload_widget" class="cloudinary-button">Upload files</button>
+    <script>
+        var myWidget = cloudinary.createUploadWidget({
+            cloudName: 'patrickg',
+            uploadPreset: 'unsigned',
+            sources: ['local', 'url']
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                console.log('Done! Here is the image info: ', result
+                    .info);
+            }
+        })
+        document.getElementById("upload_widget").addEventListener("click",
+            function() {
+                myWidget.open();
+            }, false);
+        var urlParams;
+        (window.onpopstate = function() {
+            var match,
+                pl =
+                /\+/g, // Regex for replacing addition symbol with a space
+                search = /([^&=]+)=?([^&]*)/g,
+                decode = function(s) {
+                    return decodeURIComponent(s.replace(pl, " "));
+                },
+                query = window.location.search.substring(1);
+            urlParams = {};
+            while (match = search.exec(query))
+                urlParams[decode(match[1])] = decode(match[2]);
+        })();
+        console.log(urlParams);
+        var logoId = urlParams["logoId"];
+        if (logoId) {
+            document.getElementById("logo").src =
+                "https://res.cloudinary.com/patrickg/image/upload/f_auto/q_auto/w_250,h_200,c_fit/" +
+                logoId;
+        }
+    </script>
 </body>
+
 </html>
